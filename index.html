@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width"/>
+        <meta http-equiv="X-UA-Compatible" content="ie-edge"/>
+        <link href="style.css" rel="stylesheet" type='text/css'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>Fetch JSON from API</title>
+    </head>
+    <body>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="main_text.js" ></script>
+        <div id="header-cont">
+            <div id="main-name">
+                <h2>
+                    <a href="#" id="home-link">Joke-Bar</a>
+                </h2>
+            </div>
+            <div class="link-joke-type">
+                <h3>
+                    <a href="#" id="chuck-link">Chuck Norris</a>
+                </h3>
+            </div>
+            <div class="link-joke-type">
+                <h3>
+                    <a href="#" id="dad-link">Dad Jokes</a>
+                    <!--<a href="index.html?joke_type=dad" id="dad-link">Dad Jokes</a>-->
+                </h3>
+            </div>
+        </div>
+        <div class="preload" style='display:none'>
+            <img src="loading_spinner.gif" />
+        </div>
+        <div id="instruct-holder">
+            <div id="first-load-instruct">
+                <h1>Joke-Bar</h1>
+                <p>Click a 'Joke Option' to display a joke from that particular option</p>
+            </div>
+        </div>
+        <div id="quote-holder">
+            <blockquote id='quote' class='padding' style='display:none'>
+                
+                <div class='blockquote-content padding'>
+                    <div>
+                        <h1><span id="joke-type">Chuck Norris</span> Joke</h1>
+                    </div>
+                    <div>
+                        <img id='appico' src=""/>
+                        <p id='joke-text' class='oblique'>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br/>
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.<br/>
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                    </div>
+                    <div id="question">
+                        <a href="#" id="reload-joke-icon"><i class="fa fa-refresh"></i></a>
+                    </div>
+                </div>
+                
+                
+            </blockquote>
+        </div>
+
+    </body>
+</html>

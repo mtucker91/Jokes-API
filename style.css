@@ -193,15 +193,26 @@ div.blockquote-content > div {
     background-color: #333;
 }
 
+#home-link{
+    font-size:30px;
+    width:140px;
+}
+
 .topnav a {
     float: left;
-    display: block;
+    display: flex;
     color: #f2f2f2;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
-    height:50px;
+    /*height:50px;*/
+    /*height:100%;*/
+    height:66px;
+    /*width:66px;*/
+    font-family: "Staatliches", cursive;
+    align-items: center;
+    
 }
 
 .active {
@@ -267,7 +278,15 @@ div.blockquote-content > div {
     }
     .topnav a.icon {
     float: right;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:20%;
+    height:66px;
+    }
+
+    #home-link{
+        width:80%;
     }
 }
 
@@ -278,10 +297,11 @@ div.blockquote-content > div {
     right: 0;
     top: 0;
     }
-    .topnav.responsive a {
+    .topnav.responsive a.joke-options {
     float: none;
     display: flex;
     justify-content: center;
+    width:100%;
     }
     .topnav.responsive .dropdown {float: none;}
     .topnav.responsive .dropdown-content {position: relative;}

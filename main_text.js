@@ -52,6 +52,32 @@ async function getDadData() {
     return [joketext, jokeloc];
 }
 
+async function getDarkHumorData() {
+    const url = 'https://v2.jokeapi.dev/joke/Dark';
+    const response = await fetch(url);
+    const data = await response.json();
+
+    //jokes can come in different formats
+    //twopart type comes with a setup, and then the delivery as two separate fields
+    //single type comes with just one variable of text to work with.
+    //console.log(data);
+    let joketext = '';
+    if(data.type == "single"){
+        joketext = data.joke
+    }
+    else if(data.type == "twopart"){
+        let jokesetup = data.setup;
+        let jokedelivery = "\n" + data.delivery;
+        joketext = jokesetup.concat(jokedelivery);
+    }
+    else{
+        joketext = 'there was an error with the Dark Humor API.  As it limits by 120 jokes per minute, please try back again later.';
+    }
+
+    //console.log(joketext);
+    return [joketext];
+}
+
 async function displayJokeData(opt = "else") {
     let jokeinfo = ['',''];
     if (opt == "chuck") {
@@ -65,6 +91,11 @@ async function displayJokeData(opt = "else") {
         jokeinfo[1] = 'imgs/Dad-jokes-edit.jpg'
         jokeinfo.push("Dad");
     }
+    else if (opt = "dark"){
+        jokeinfo = await getDarkHumorData();
+        jokeinfo[1] = 'imgs/dh_icon.png'
+        jokeinfo.push("Dark Humor");
+    }
     else {
         jokeinfo = ["No Joke loaded at this time.  Try an option again", "nothing"];
     }
@@ -77,6 +108,8 @@ async function displayJokeData(opt = "else") {
         $("#quote").fadeIn(1000);
     })
 }
+
+
 
 //TODO: Setup hide instruct-holder, show preload gif,
 /*followed by hiding preload gif, and then loading joke. */
@@ -103,6 +136,14 @@ $(document).ready(() => {
         $("#instruct-holder").hide();
         //let getparam = confirmParams();
         getparam = "dad";
+        displayJokeData(getparam);
+    });
+
+    $("#dh-link").click(() => {
+        //hides the instructions from the home page
+        $("#instruct-holder").hide();
+        //let getparam = confirmParams();
+        getparam = "dark";
         displayJokeData(getparam);
     });
 

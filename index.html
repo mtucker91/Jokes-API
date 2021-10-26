@@ -4,19 +4,23 @@
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width"/>
         <meta http-equiv="X-UA-Compatible" content="ie-edge"/>
+        <link rel="stylesheet" href="toggle-button.css">
         <link href="style.css" rel="stylesheet" type='text/css'>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <title>Fetch JSON from API</title>
+        
+        <title>Jokes APIs</title>
     </head>
     <body>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="main_text.js" ></script>
         <div class="topnav" id="myTopnav">
             <a href="#home" id="home-link" class="active">Joke-Bar</a>
-            <a href="#news" id="chuck-link" class="joke-options">Chuck Norris</a>
-            <a href="#contact" id="dad-link" class="joke-options">Dad Jokes</a>
-            <a href="#contact" id="dh-link" class="joke-options">Dark Humor</a>
+            <a href="#chucknorris" id="chuck-link" class="joke-options">Chuck Norris</a>
+            <a href="#dadjokes" id="dad-link" class="joke-options">Dad Jokes</a>
+            <a href="#darkhumor" id="dh-link" class="joke-options">Dark Humor</a>
+            <!--<a href="#evilinsult" id="ei-link" class="joke-options">Evil Insult</a>-->
+            <!--<a href="#yomomma" id="yomomma-link" class="joke-options">Yo Momma</a>-->
             <!--<div class="dropdown">
               <button class="dropbtn">Dropdown 
                 <i class="fa fa-caret-down"></i>
@@ -75,13 +79,22 @@
                         </p>
                     </div>
                     <div id="question">
-                        <a href="#" id="reload-joke-icon"><i class="fa fa-refresh"></i></a>
+                        <div class="icons-spaced">
+                            <a href="#" class="icons" title="Copy URL to Joke"><i class="fas fa-copy"></i></a>
+                        </div>
+                        <div class="icons-spaced">
+                            <a href="#" class="icons" id="reload-joke-icon" title="Refresh for another Joke"><i class="fa fa-refresh"></i></a>
+                        </div>
                     </div>
                 </div>
                 
                 
             </blockquote>
         </div>
-
+        <form>
+            <input id="dark-mode" class="toggle" type="checkbox" name="Dark mode" role="switch" value="on">
+            <label for="dark-mode" class="sr">Dark Mode</label>
+            <div class="curtain"></div>
+        </form>
     </body>
 </html>

@@ -1,4 +1,4 @@
-function confirmParams(){
+/*function confirmParams(){
     let searchParams = new URLSearchParams(window.location.search)
     let retval = null
     if(searchParams.has('joke_type') == true){
@@ -28,7 +28,7 @@ function confirmParams(){
     }
 
     return retval
-}
+} */
 
 async function getChuckData() {
     const url = 'https://api.chucknorris.io/jokes/random';
@@ -42,14 +42,26 @@ async function getChuckData() {
 }
 
 async function getDadData() {
+    //API docs
+    //https://icanhazdadjoke.com/api
     const url = 'https://icanhazdadjoke.com/slack';
     const response = await fetch(url);
     const data = await response.json();
+    console.log(data);
+
     const joketext = data.attachments[0].text;
     const jokeloc = data.attachments[0].footer;
 
+    let indexpoint = Array();
+    indexpoint[0] = jokeloc.indexOf("/j/") + 3;
+    indexpoint[1] = jokeloc.indexOf("|permalink");
+    const jokeid = jokeloc.slice(indexpoint[0], indexpoint[1]);
+    //console.log(indexpoint[0]);
+    //console.log(indexpoint[1]);
+    //console.log(jokeid);
+
     //console.log(joketext);
-    return [joketext, jokeloc];
+    return [joketext, jokeloc, jokeid];
 }
 
 async function getDarkHumorData() {
@@ -78,32 +90,67 @@ async function getDarkHumorData() {
     return [joketext];
 }
 
+/*
+//Doesn't work due to browser CORS errors when testing
+async function getEvilInsult() {
+    const url = 'https://evilinsult.com/generate_insult.php?lang=en&type=json';
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+    const joketext = data.insult;
+
+    console.log(joketext);
+    return [joketext];
+}
+
+*/
+
+async function getYoMommaData() {
+    const url = 'https://api.yomomma.info/';
+    const response = await fetch(url);
+    const data = await response.json();
+    const joketext = data.joke;
+    //console.log(joketext);
+    return [joketext];
+}
+
 async function displayJokeData(opt = "else") {
     let jokeinfo = ['',''];
     if (opt == "chuck") {
         jokeinfo = await getChuckData();
-        if(jokeinfo[1] == '' || jokeinfo[1] == null)
-        jokeinfo[1] = 'imgs/chuck-norris.png'
+        //if(jokeinfo[1] == '' || jokeinfo[1] == null)
+        jokeinfo.push('imgs/chuck-norris.png');
         jokeinfo.push("Chuck Norris");
     }
     else if (opt == "dad") {
         jokeinfo = await getDadData();
-        jokeinfo[1] = 'imgs/Dad-jokes-edit.jpg'
+        jokeinfo.push('imgs/Dad-jokes-edit.jpg');
         jokeinfo.push("Dad");
+        //console.log(jokeinfo[jokeinfo.length - 1]);
     }
-    else if (opt = "dark"){
+    else if (opt == "dark"){
         jokeinfo = await getDarkHumorData();
-        jokeinfo[1] = 'imgs/dh_icon.png'
+        jokeinfo.push('imgs/dh_icon.png');
         jokeinfo.push("Dark Humor");
+    }
+    /*else if (opt == "evil"){
+        jokeinfo = await getEvilInsult();
+        jokeinfo[1] = 'imgs/evil_icon.png';
+        jokeinfo.push("Evil Insult");
+    }*/
+    else if (opt == "yomomma"){
+        jokeinfo = await getYoMommaData();
+        jokeinfo.push('imgs/evil_icon.png');
+        jokeinfo.push("Yo Momma");
     }
     else {
         jokeinfo = ["No Joke loaded at this time.  Try an option again", "nothing"];
     }
 
-    console.log(jokeinfo);
+    //console.log(jokeinfo);
     document.getElementById('joke-text').textContent = jokeinfo[0];
-    document.getElementById('appico').src = jokeinfo[1];
-    document.getElementById('joke-type').textContent = jokeinfo[2];
+    document.getElementById('appico').src = jokeinfo[jokeinfo.length - 2];
+    document.getElementById('joke-type').textContent = jokeinfo[jokeinfo.length - 1];
     $('.preload').fadeOut(1,function(){
         $("#quote").fadeIn(1000);
     })
@@ -116,6 +163,10 @@ async function displayJokeData(opt = "else") {
 
 $(document).ready(() => {
     let getparam = "none";
+    if(window.location.search != ''){
+
+    }
+    
 
     $("#reload-joke-icon").click(() => {
         //hides the quote block so it can load the next one
@@ -146,6 +197,22 @@ $(document).ready(() => {
         getparam = "dark";
         displayJokeData(getparam);
     });
+/*
+    $("#ei-link").click(() => {
+        //hides the instructions from the home page
+        $("#instruct-holder").hide();
+        //let getparam = confirmParams();
+        getparam = "evil";
+        displayJokeData(getparam);
+    });
+*/
+    $("#yomomma-link").click(() => {
+        //hides the instructions from the home page
+        $("#instruct-holder").hide();
+        //let getparam = confirmParams();
+        getparam = "yomomma";
+        displayJokeData(getparam);
+    });
 
     $("#home-link").click(() => {
         //hides the quote block so it can load the next one
@@ -153,7 +220,6 @@ $(document).ready(() => {
         //shows the instructions from the home page
         $("#instruct-holder").show();
     });
-
 });
 
 function myFunction() {

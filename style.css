@@ -12,11 +12,11 @@
     font-family: "Merriweather Sans", sans-serif;
 }
 
-html {
+/*html {
     background-color: #eee;
-}
+}*/
 
-html .dark-mode{
+html body.dark-mode{
     background-color: #161616;
     
 }
@@ -27,7 +27,7 @@ body {
     flex-wrap: wrap;
 }
 
-body .dark-mode {
+body.dark-mode {
     color: #161616;
 }
 
@@ -59,7 +59,7 @@ blockquote .blockquote-content {
     z-index: 1;
 }
 
-blockquote .blockquote-content .dark-mode {
+body.dark-mode blockquote .blockquote-content {
 
     border-top: 10px solid #5f5f5f;
     background-color: #000;
@@ -180,8 +180,8 @@ div.blockquote-content > div {
     color:black;
 }
 
-.icons:hover > i.fa .dark-mode,
-.icons:hover > i.fas .dark-mode 
+body.dark-mode .icons:hover > i.fa,
+body.dark-mode .icons:hover > i.fas
 {
     color:#FFF;
 }
@@ -214,7 +214,7 @@ div.blockquote-content > div {
     margin:30px 0px 30px 0px;
 }
 
-#first-load-instruct .dark-mode{
+body.dark-mode #first-load-instruct {
     background-color: #000;
 }
 
@@ -243,7 +243,7 @@ div.blockquote-content > div {
     background-color: #333;
 }
 
-.topnav .dark-mode{
+body.dark-mode .topnav{
     background-color: #bebebe;
 }
 
@@ -269,7 +269,7 @@ div.blockquote-content > div {
     
 }
 
-.topnav a .dark-mode{
+body.dark-mode .topnav a{
     color: #2f2f2f;
 }
 
@@ -281,7 +281,7 @@ div.blockquote-content > div {
 }
 
 
-.active .dark-mode{
+body.dark-mode .active{
     background-color: #347836;
     color: #e8e8e8;
 }
@@ -334,7 +334,7 @@ div.blockquote-content > div {
     color: black;
 }
 
-.dropdown-content .dark-mode a:hover {
+body.dark-mode .dropdown-content a:hover {
     background-color: #2b2b2b;
     color: #c9c9c9;
 }

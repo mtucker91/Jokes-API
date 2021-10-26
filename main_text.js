@@ -230,3 +230,13 @@ function myFunction() {
       x.className = "topnav";
     }
   }
+
+  function darkMode() {
+    const x = document.getElementById("dark-mode");
+    const bod = document.getElementById("bod");
+    if (x.checked === true && bod.className != "dark-mode") {
+      bod.className += "dark-mode";
+    } else {
+      bod.className = "";
+    }
+  }

@@ -11,7 +11,7 @@
         
         <title>Jokes APIs</title>
     </head>
-    <body>
+    <body id="bod">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="main_text.js" ></script>
         <div class="topnav" id="myTopnav">
@@ -32,6 +32,9 @@
               </div>
             </div> -->
             <!--<a href="#about">About</a> -->
+            <a href="javascript:void(0);">
+                <input id="dark-mode"  onclick="darkMode()" class="toggle" type="checkbox" name="Dark mode" role="switch" value="off">
+            </a>
             <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
         </div>
         <!--
@@ -91,10 +94,6 @@
                 
             </blockquote>
         </div>
-        <form>
-            <input id="dark-mode" class="toggle" type="checkbox" name="Dark mode" role="switch" value="on">
-            <label for="dark-mode" class="sr">Dark Mode</label>
-            <div class="curtain"></div>
-        </form>
+
     </body>
 </html>

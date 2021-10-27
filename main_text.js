@@ -29,6 +29,27 @@
 
     return retval
 } */
+function setCookie(cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    let expires = "expires="+d.toUTCString();
+    document.cookie = "darkmode=" + cvalue + ";" + expires + ";path=/; samesite=Strict";
+}
+
+function getCookie() {
+    let name = "darkmode=";
+    let ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
 
 async function getChuckData() {
     const url = 'https://api.chucknorris.io/jokes/random';
@@ -163,10 +184,16 @@ async function displayJokeData(opt = "else") {
 
 $(document).ready(() => {
     let getparam = "none";
-    if(window.location.search != ''){
 
+    let cookiechck = getCookie();
+    //alert(cookiechck);
+    if (cookiechck === "true"){
+        predarkMode(true);
+        //alert('truechck confirmed');
     }
-    
+    else{
+        predarkMode(false);
+    }
 
     $("#reload-joke-icon").click(() => {
         //hides the quote block so it can load the next one
@@ -225,18 +252,32 @@ $(document).ready(() => {
 function myFunction() {
     var x = document.getElementById("myTopnav");
     if (x.className === "topnav") {
-      x.className += " responsive";
+        x.className += " responsive";
     } else {
-      x.className = "topnav";
+        x.className = "topnav";
     }
-  }
+}
 
-  function darkMode() {
+function darkMode() {
     const x = document.getElementById("dark-mode");
     const bod = document.getElementById("bod");
     if (x.checked === true && bod.className != "dark-mode") {
-      bod.className += "dark-mode";
+        bod.className += "dark-mode";
+        setCookie(true, 30);
     } else {
-      bod.className = "";
+        bod.className = "";
+        setCookie(false, -30);
     }
-  }
+}
+
+function predarkMode(preset){
+    const chckbx = document.getElementById("dark-mode");
+    const bod = document.getElementById("bod");
+    if (preset === true) {
+        bod.className += "dark-mode";
+        chckbx.checked = true;
+    } else {
+        bod.className = "";
+        chckbx.checked = false;
+    }
+}

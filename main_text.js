@@ -57,9 +57,10 @@ async function getChuckData() {
     const data = await response.json();
     const joketext = data.value;
     const icon_url = data.icon_url;
-    //console.log(joketext);
+    const joke_url = data.url;
+    console.log(joke_url);
 
-    return [joketext, icon_url];
+    return [joketext, icon_url, joke_url];
 }
 
 async function getDadData() {
@@ -71,18 +72,21 @@ async function getDadData() {
     console.log(data);
 
     const joketext = data.attachments[0].text;
-    const jokeloc = data.attachments[0].footer;
+    let jokeloc = data.attachments[0].footer;
 
+    //the extra work needed to get the URL for the joke from their API
     let indexpoint = Array();
     indexpoint[0] = jokeloc.indexOf("/j/") + 3;
     indexpoint[1] = jokeloc.indexOf("|permalink");
     const jokeid = jokeloc.slice(indexpoint[0], indexpoint[1]);
     //console.log(indexpoint[0]);
     //console.log(indexpoint[1]);
-    //console.log(jokeid);
-
     //console.log(joketext);
-    return [joketext, jokeloc, jokeid];
+    jokeloc = 'https://icanhazdadjoke.com/j/' + jokeid;
+    console.log(jokeloc);
+    //console.log(jokeid);
+    
+    return [joketext, jokeloc];
 }
 
 async function getDarkHumorData() {
@@ -107,8 +111,11 @@ async function getDarkHumorData() {
         joketext = 'there was an error with the Dark Humor API.  As it limits by 120 jokes per minute, please try back again later.';
     }
 
+    copyurl = 'https://v2.jokeapi.dev/joke/Dark?idRange=' + data.id;
+    console.log(copyurl);
+
     //console.log(joketext);
-    return [joketext];
+    return [joketext, copyurl];
 }
 
 /*
@@ -170,6 +177,9 @@ async function displayJokeData(opt = "else") {
 
     //console.log(jokeinfo);
     document.getElementById('joke-text').textContent = jokeinfo[0];
+    console.log('copy-url value is '+ document.getElementById('copy-url').value);
+    document.getElementById('copy-url').value = jokeinfo[jokeinfo.length - 3];
+    console.log('copy-url value is '+ document.getElementById('copy-url').value);
     document.getElementById('appico').src = jokeinfo[jokeinfo.length - 2];
     document.getElementById('joke-type').textContent = jokeinfo[jokeinfo.length - 1];
     $('.preload').fadeOut(1,function(){
@@ -184,7 +194,7 @@ async function displayJokeData(opt = "else") {
 
 $(document).ready(() => {
     let getparam = "none";
-
+    let copyurl = "none";
     let cookiechck = getCookie();
     //alert(cookiechck);
     if (cookiechck === "true"){
@@ -247,6 +257,16 @@ $(document).ready(() => {
         //shows the instructions from the home page
         $("#instruct-holder").show();
     });
+
+    $("#copy-url").click(() => {
+        //hides the quote block so it can load the next one
+        copyurl = document.getElementById('copy-url').value;
+        navigator.clipboard.writeText(copyurl);
+        //shows the instructions from the home page
+        alert('Copied the direct URL to the joke');
+        //$("#instruct-holder").show();
+    });
+
 });
 
 function myFunction() {
@@ -280,4 +300,8 @@ function predarkMode(preset){
         bod.className = "";
         chckbx.checked = false;
     }
+}
+
+function copyText(){
+
 }

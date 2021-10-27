@@ -164,8 +164,7 @@ div.blockquote-content > div {
     font-size: 30px;
 }
 
-.icons-spaced
-{
+.icons-spaced {
     display:flex;
 }
 
@@ -359,6 +358,14 @@ body.dark-mode .dropdown-content a:hover {
     #home-link{
         width:80%;
     }
+
+    .padding{
+        padding: 10px;
+    }
+
+    .icons-spaced {
+        margin:30px 0px 20px 0px;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -381,6 +388,7 @@ body.dark-mode .dropdown-content a:hover {
     width: 100%;
     text-align: left;
     }
+
 }
 
 a[title]:hover:after{

@@ -83,7 +83,7 @@ async function getDadData() {
     //console.log(indexpoint[1]);
     //console.log(joketext);
     jokeloc = 'https://icanhazdadjoke.com/j/' + jokeid;
-    console.log(jokeloc);
+    //console.log(jokeloc);
     //console.log(jokeid);
     
     return [joketext, jokeloc];
@@ -111,11 +111,11 @@ async function getDarkHumorData() {
         joketext = 'there was an error with the Dark Humor API.  As it limits by 120 jokes per minute, please try back again later.';
     }
 
-    copyurl = 'https://v2.jokeapi.dev/joke/Dark?idRange=' + data.id;
-    console.log(copyurl);
+    linkurl = 'https://v2.jokeapi.dev/joke/Dark?idRange=' + data.id;
+    console.log(linkurl);
 
     //console.log(joketext);
-    return [joketext, copyurl];
+    return [joketext, linkurl];
 }
 
 /*
@@ -177,9 +177,10 @@ async function displayJokeData(opt = "else") {
 
     //console.log(jokeinfo);
     document.getElementById('joke-text').textContent = jokeinfo[0];
-    console.log('copy-url value is '+ document.getElementById('copy-url').value);
-    document.getElementById('copy-url').value = jokeinfo[jokeinfo.length - 3];
-    console.log('copy-url value is '+ document.getElementById('copy-url').value);
+    //console.log('link-url value is '+ document.getElementById('link-url').value);
+    document.getElementById('link-url').value = jokeinfo[jokeinfo.length - 3];
+    document.getElementById('copy-url').value = jokeinfo[0];
+    //console.log('link-url value is '+ document.getElementById('link-url').value);
     document.getElementById('appico').src = jokeinfo[jokeinfo.length - 2];
     document.getElementById('joke-type').textContent = jokeinfo[jokeinfo.length - 1];
     $('.preload').fadeOut(1,function(){
@@ -194,7 +195,7 @@ async function displayJokeData(opt = "else") {
 
 $(document).ready(() => {
     let getparam = "none";
-    let copyurl = "none";
+    let linkurl = "none";
     let cookiechck = getCookie();
     //alert(cookiechck);
     if (cookiechck === "true"){
@@ -258,12 +259,21 @@ $(document).ready(() => {
         $("#instruct-holder").show();
     });
 
+    $("#link-url").click(() => {
+        //hides the quote block so it can load the next one
+        linkurl = document.getElementById('link-url').value;
+        navigator.clipboard.writeText(linkurl);
+        //shows the instructions from the home page
+        //alert('Copied the direct URL to the joke');
+        //$("#instruct-holder").show();
+    });
+
     $("#copy-url").click(() => {
         //hides the quote block so it can load the next one
         copyurl = document.getElementById('copy-url').value;
         navigator.clipboard.writeText(copyurl);
         //shows the instructions from the home page
-        alert('Copied the direct URL to the joke');
+        //alert('Copied the direct URL to the joke');
         //$("#instruct-holder").show();
     });
 

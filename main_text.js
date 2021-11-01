@@ -69,7 +69,7 @@ async function getDadData() {
     const url = 'https://icanhazdadjoke.com/slack';
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data);
+    //console.log(data);
 
     const joketext = data.attachments[0].text;
     let jokeloc = data.attachments[0].footer;
@@ -112,7 +112,7 @@ async function getDarkHumorData() {
     }
 
     linkurl = 'https://v2.jokeapi.dev/joke/Dark?idRange=' + data.id;
-    console.log(linkurl);
+    //console.log(linkurl);
 
     //console.log(joketext);
     return [joketext, linkurl];
